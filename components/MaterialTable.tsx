@@ -7,8 +7,9 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {createTableData, getComparator} from '../utilities/helpers';
-import {TableData, IRandomUser, Order} from '../utilities/types';
+import {TableData, IRandomUser, Order, Gender} from '../utilities/types';
 import {EnhancedTableHead} from "./EnhancedTableHead";
+import {Box, FormControlLabel, FormGroup, Switch} from "@mui/material";
 
 interface IProps {
     users: IRandomUser[]
@@ -19,8 +20,21 @@ export default function EnhancedTable({users}: IProps) {
     const [orderBy, setOrderBy] = React.useState<keyof TableData>('firstName');
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [onlyMales, setOnlyMales] = React.useState(false);
+    const [onlyFemales, setOnlyFemales] = React.useState(false);
 
-    const rows = users.map((user) => {
+    const rows = users.filter((user) => {
+        if (onlyMales) {
+            return user.gender === 'male'
+        }
+
+        if (onlyFemales) {
+            return user.gender === 'female'
+        }
+
+        return user;
+
+    }).map((user) => {
         return createTableData(
             user.name.first,
             user.name.last,
@@ -29,7 +43,17 @@ export default function EnhancedTable({users}: IProps) {
             user.location.country,
             user.location.postcode,
             user.email)
-    })
+    });
+
+    const toggleGenderFilter = (gender: Gender, checked: boolean) => {
+        if (gender === 'male') {
+            setOnlyMales(checked);
+            setOnlyFemales(false);
+        } else {
+            setOnlyMales(false);
+            setOnlyFemales(checked);
+        }
+    }
 
     const handleRequestSort = (
         event: React.MouseEvent<unknown>,
@@ -102,15 +126,27 @@ export default function EnhancedTable({users}: IProps) {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[10, 20, 50]}
-                component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
+            <Box sx={{display: 'flex', justifyContent: 'space-between', padding: '0 1rem'}}>
+                <FormGroup row>
+                    <FormControlLabel control={<Switch checked={onlyMales}
+                                                       onChange={(e) => {
+                                                           toggleGenderFilter('male', e.target.checked)
+                                                       }}/>} label="Males only"/>
+                    <FormControlLabel control={<Switch checked={onlyFemales}
+                                                       onChange={(e) => {
+                                                           toggleGenderFilter('female', e.target.checked)
+                                                       }}/>} label="Females only"/>
+                </FormGroup>
+                <TablePagination
+                    rowsPerPageOptions={[10, 20, 50]}
+                    component="div"
+                    count={rows.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            </Box>
         </Paper>
     );
 }

@@ -20,6 +20,8 @@ export interface IRandomUser {
 
 export type Order = 'asc' | 'desc'
 
+export type Gender = 'male' | 'female'
+
 export interface TableData {
     firstName: string;
     lastName: string;
