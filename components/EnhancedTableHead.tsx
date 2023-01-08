@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import {visuallyHidden} from "@mui/utils";
 import {TableData, HeadCell, Order} from "../utilities/types";
 
-interface EnhancedTableProps {
+interface IProps {
     onRequestSort: (event: React.MouseEvent<unknown>, property: keyof TableData) => void;
     order: Order;
     orderBy: string;
@@ -52,7 +52,7 @@ const headCells: readonly HeadCell[] = [
     },
 ];
 
-export function EnhancedTableHead(props: EnhancedTableProps) {
+export function EnhancedTableHead(props: IProps) {
     const {order, orderBy, onRequestSort} =
         props;
     const createSortHandler =

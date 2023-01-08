@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {createTableData, getComparator, stableSort} from '../utilities/helpers';
+import {createTableData, getComparator} from '../utilities/helpers';
 import {TableData, IRandomUser, Order} from '../utilities/types';
 import {EnhancedTableHead} from "./EnhancedTableHead";
 
@@ -69,8 +69,9 @@ export default function EnhancedTable({users}: IProps) {
                         rowCount={rows.length}
                     />
                     <TableBody>
-                        {stableSort(rows, getComparator(order, orderBy))
+                        {rows
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            .sort(getComparator(order, orderBy))
                             .map((row, key) => {
                                 return (
                                     <TableRow
