@@ -1,36 +1,40 @@
-import type { NextPage } from 'next'
-import {MaterialTable} from "../components/MaterialTable";
+import type {NextPage} from 'next'
 import {useFetchUsers} from "../utilities/queries";
 import React from "react";
-import {Alert, Box } from '@mui/material';
+import {Alert, Box} from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
+import {filterUsersByPostcode} from "../utilities/helpers";
+import EnhancedTable from '../components/MaterialTable';
 
 const Home: NextPage = () => {
 
-  const {
-    data: users,
-    isLoading,
-    isError,
-  } = useFetchUsers();
+    const {
+        data: response,
+        isLoading,
+        isError,
+    } = useFetchUsers();
 
-  if (isLoading) {
+    if (isLoading) {
+        return (
+            <Box sx={{display: 'flex'}}>
+                <CircularProgress/>
+            </Box>
+        );
+    }
+
+    if (isError) {
+        return (
+            <Alert severity="error">Hiba történt az adatok lekérése során :(</Alert>
+        );
+    }
+
+    const filteredUsers = filterUsersByPostcode(response.results);
+
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CircularProgress />
+        <Box sx={{maxWidth: '1200px', margin: '3rem auto'}}>
+            <EnhancedTable/>
         </Box>
-    );
-  }
-
-  if (isError) {
-    return (
-        <Alert severity="error">Hiba történt az adatok lekérése során :(</Alert>
-    );
-  }
-
-
-  return (
-      <MaterialTable/>
-  )
+    )
 }
 
 export default Home
