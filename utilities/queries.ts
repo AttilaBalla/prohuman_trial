@@ -7,7 +7,7 @@ export const useFetchUsers = () => {
         async () =>
             (
                 await axiosInstance.get(
-                    `/api/?results=20`
+                    `/api/?results=50`
                 )
             ).data
     )

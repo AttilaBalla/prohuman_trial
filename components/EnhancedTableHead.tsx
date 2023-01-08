@@ -5,10 +5,10 @@ import TableCell from "@mui/material/TableCell";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Box from "@mui/material/Box";
 import {visuallyHidden} from "@mui/utils";
-import {Data, HeadCell, Order} from "../utilities/types";
+import {TableData, HeadCell, Order} from "../utilities/types";
 
 interface EnhancedTableProps {
-    onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
+    onRequestSort: (event: React.MouseEvent<unknown>, property: keyof TableData) => void;
     order: Order;
     orderBy: string;
     rowCount: number;
@@ -16,29 +16,39 @@ interface EnhancedTableProps {
 
 const headCells: readonly HeadCell[] = [
     {
-        id: 'name',
+        id: 'firstName',
         numeric: false,
-        label: 'Dessert (100g serving)',
+        label: 'First Name',
     },
     {
-        id: 'calories',
-        numeric: true,
-        label: 'Calories',
+        id: 'lastName',
+        numeric: false,
+        label: 'Last Name',
     },
     {
-        id: 'fat',
+        id: 'age',
         numeric: true,
-        label: 'Fat (g)',
+        label: 'Age',
     },
     {
-        id: 'carbs',
-        numeric: true,
-        label: 'Carbs (g)',
+        id: 'city',
+        numeric: false,
+        label: 'City',
     },
     {
-        id: 'protein',
+        id: 'country',
+        numeric: false,
+        label: 'Country',
+    },
+    {
+        id: 'postalCode',
         numeric: true,
-        label: 'Protein (g)',
+        label: 'Postal Code',
+    },
+    {
+        id: 'email',
+        numeric: false,
+        label: 'E-mail',
     },
 ];
 
@@ -46,7 +56,7 @@ export function EnhancedTableHead(props: EnhancedTableProps) {
     const {order, orderBy, onRequestSort} =
         props;
     const createSortHandler =
-        (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
+        (property: keyof TableData) => (event: React.MouseEvent<unknown>) => {
             onRequestSort(event, property);
         };
 

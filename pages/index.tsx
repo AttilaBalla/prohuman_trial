@@ -32,7 +32,7 @@ const Home: NextPage = () => {
 
     return (
         <Box sx={{maxWidth: '1200px', margin: '3rem auto'}}>
-            <EnhancedTable/>
+            <EnhancedTable users={filteredUsers}/>
         </Box>
     )
 }

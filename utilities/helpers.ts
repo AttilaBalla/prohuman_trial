@@ -1,4 +1,4 @@
-import {IRandomUser, Order} from "./types";
+import {TableData, IRandomUser, Order} from "./types";
 
 function isPrime(number: number) {
     let start = 2;
@@ -58,4 +58,24 @@ export function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => n
         return a[1] - b[1];
     });
     return stabilizedThis.map((el) => el[0]);
+}
+
+export function createTableData(
+    firstName: string,
+    lastName: string,
+    age: number,
+    city: string,
+    country: string,
+    postalCode: number,
+    email: string,
+): TableData {
+    return {
+        firstName,
+        lastName,
+        age,
+        city,
+        country,
+        postalCode,
+        email,
+    };
 }
