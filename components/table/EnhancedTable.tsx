@@ -37,10 +37,11 @@ export default function EnhancedTable({users}: IProps) {
             user.name.first,
             user.name.last,
             user.dob.age,
+            user.gender,
             user.location.city,
             user.location.country,
             user.location.postcode,
-            user.email)
+            )
     });
 
     const toggleGenderFilter = (gender: Gender, checked: boolean) => {

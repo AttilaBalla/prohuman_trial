@@ -34,10 +34,10 @@ export function EnhancedTableBody({rows, page, rowsPerPage, order, orderBy}: IPr
                             <TableCell>{row.firstName}</TableCell>
                             <TableCell>{row.lastName}</TableCell>
                             <TableCell align="right">{row.age}</TableCell>
+                                <TableCell>{row.gender}</TableCell>
                             <TableCell>{row.city}</TableCell>
                             <TableCell>{row.country}</TableCell>
                             <TableCell align="right">{row.postalCode}</TableCell>
-                            <TableCell>{row.email}</TableCell>
                             </TableRow>
                     );
                     })}

@@ -26,10 +26,10 @@ export interface TableData {
     firstName: string;
     lastName: string;
     age: number;
+    gender: string;
     city: string;
     country: string;
     postalCode: number;
-    email: string;
 }
 
 export interface HeadCell {

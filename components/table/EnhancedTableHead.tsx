@@ -31,6 +31,11 @@ const headCells: readonly HeadCell[] = [
         label: 'Age',
     },
     {
+        id: 'gender',
+        numeric: false,
+        label: 'Gender',
+    },
+    {
         id: 'city',
         numeric: false,
         label: 'City',
@@ -44,11 +49,6 @@ const headCells: readonly HeadCell[] = [
         id: 'postalCode',
         numeric: true,
         label: 'Postal Code',
-    },
-    {
-        id: 'email',
-        numeric: false,
-        label: 'E-mail',
     },
 ];
 

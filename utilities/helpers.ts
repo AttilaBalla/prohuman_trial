@@ -48,18 +48,18 @@ export function createTableData(
     firstName: string,
     lastName: string,
     age: number,
+    gender: string,
     city: string,
     country: string,
     postalCode: number,
-    email: string,
 ): TableData {
     return {
         firstName,
         lastName,
         age,
+        gender,
         city,
         country,
         postalCode,
-        email,
     };
 }
