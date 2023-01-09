@@ -4,7 +4,7 @@ import React from "react";
 import {Alert, Box} from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import {filterUsersByPostcode} from "../utilities/helpers";
-import EnhancedTable from '../components/MaterialTable';
+import EnhancedTable from '../components/table/EnhancedTable';
 
 const Home: NextPage = () => {
 

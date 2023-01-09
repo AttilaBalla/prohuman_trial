@@ -1,15 +1,13 @@
 import * as React from 'react';
 import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {createTableData, getComparator} from '../utilities/helpers';
-import {TableData, IRandomUser, Order, Gender} from '../utilities/types';
+import {createTableData} from '../../utilities/helpers';
+import {TableData, IRandomUser, Order, Gender} from '../../utilities/types';
 import {EnhancedTableHead} from "./EnhancedTableHead";
 import {Box, FormControlLabel, FormGroup, Switch} from "@mui/material";
+import {EnhancedTableBody} from "./EnhancedTableBody";
 
 interface IProps {
     users: IRandomUser[]
@@ -73,9 +71,6 @@ export default function EnhancedTable({users}: IProps) {
         setPage(0);
     };
 
-    // Avoid a layout jump when reaching the last page with empty rows.
-    const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
     return (
         <Paper sx={{width: '100%', mb: 2, overflow: 'hidden'}}>
@@ -92,38 +87,13 @@ export default function EnhancedTable({users}: IProps) {
                         onRequestSort={handleRequestSort}
                         rowCount={rows.length}
                     />
-                    <TableBody>
-                        {rows
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .sort(getComparator(order, orderBy))
-                            .map((row, key) => {
-                                return (
-                                    <TableRow
-                                        hover
-                                        role="checkbox"
-                                        tabIndex={-1}
-                                        key={key}
-                                    >
-                                        <TableCell>{row.firstName}</TableCell>
-                                        <TableCell>{row.lastName}</TableCell>
-                                        <TableCell align="right">{row.age}</TableCell>
-                                        <TableCell>{row.city}</TableCell>
-                                        <TableCell>{row.country}</TableCell>
-                                        <TableCell align="right">{row.postalCode}</TableCell>
-                                        <TableCell>{row.email}</TableCell>
-                                    </TableRow>
-                                );
-                            })}
-                        {emptyRows > 0 && (
-                            <TableRow
-                                style={{
-                                    height: (53) * emptyRows,
-                                }}
-                            >
-                                <TableCell colSpan={6}/>
-                            </TableRow>
-                        )}
-                    </TableBody>
+                    <EnhancedTableBody
+                        page={page}
+                        rows={rows}
+                        rowsPerPage={rowsPerPage}
+                        order={order}
+                        orderBy={orderBy}
+                    />
                 </Table>
             </TableContainer>
             <Box sx={{display: 'flex', justifyContent: 'space-between', padding: '0 1rem'}}>

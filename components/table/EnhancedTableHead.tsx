@@ -5,7 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Box from "@mui/material/Box";
 import {visuallyHidden} from "@mui/utils";
-import {TableData, HeadCell, Order} from "../utilities/types";
+import {TableData, HeadCell, Order} from "../../utilities/types";
 
 interface IProps {
     onRequestSort: (event: React.MouseEvent<unknown>, property: keyof TableData) => void;
