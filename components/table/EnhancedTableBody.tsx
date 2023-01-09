@@ -12,6 +12,7 @@ interface IProps {
     order: Order;
     orderBy: keyof TableData;
 }
+
 export function EnhancedTableBody({rows, page, rowsPerPage, order, orderBy}: IProps) {
 
     // Avoid a layout jump when reaching the last page with empty rows.
@@ -22,34 +23,35 @@ export function EnhancedTableBody({rows, page, rowsPerPage, order, orderBy}: IPr
         <TableBody>
             {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .sort(getComparator(order, orderBy))
-                    .map((row, key) => {
-                        return (
-                            <TableRow
-                                hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={key}
-                            >
+                .sort(getComparator(order, orderBy))
+                .map((row, key) => {
+                    return (
+                        <TableRow
+                            hover
+                            role="checkbox"
+                            tabIndex={-1}
+                            key={key}
+                            data-cy={'table-row'}
+                        >
                             <TableCell>{row.firstName}</TableCell>
                             <TableCell>{row.lastName}</TableCell>
                             <TableCell align="right">{row.age}</TableCell>
-                                <TableCell>{row.gender}</TableCell>
+                            <TableCell data-cy={'gender-column'}>{row.gender}</TableCell>
                             <TableCell>{row.city}</TableCell>
                             <TableCell>{row.country}</TableCell>
                             <TableCell align="right">{row.postalCode}</TableCell>
-                            </TableRow>
+                        </TableRow>
                     );
-                    })}
-    {emptyRows > 0 && (
-        <TableRow
-            style={{
-        height: (53) * emptyRows,
-    }}
-    >
-        <TableCell colSpan={6}/>
-    </TableRow>
-    )}
-    </TableBody>
+                })}
+            {emptyRows > 0 && (
+                <TableRow
+                    style={{
+                        height: (53) * emptyRows,
+                    }}
+                >
+                    <TableCell colSpan={6}/>
+                </TableRow>
+            )}
+        </TableBody>
     )
 }

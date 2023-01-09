@@ -65,6 +65,7 @@ export function EnhancedTableHead(props: IProps) {
             <TableRow>
                 {headCells.map((headCell) => (
                     <TableCell
+                        data-cy={'header-column'}
                         key={headCell.id}
                         align={headCell.numeric ? 'right' : 'left'}
                         sortDirection={orderBy === headCell.id ? order : false}

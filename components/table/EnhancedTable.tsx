@@ -41,7 +41,7 @@ export default function EnhancedTable({users}: IProps) {
             user.location.city,
             user.location.country,
             user.location.postcode,
-            )
+        )
     });
 
     const toggleGenderFilter = (gender: Gender, checked: boolean) => {
@@ -99,14 +99,18 @@ export default function EnhancedTable({users}: IProps) {
             </TableContainer>
             <Box sx={{display: 'flex', justifyContent: 'space-between', padding: '0 1rem'}}>
                 <FormGroup row>
-                    <FormControlLabel control={<Switch checked={onlyMales}
-                                                       onChange={(e) => {
-                                                           toggleGenderFilter('male', e.target.checked)
-                                                       }}/>} label="Males only"/>
-                    <FormControlLabel control={<Switch checked={onlyFemales}
-                                                       onChange={(e) => {
-                                                           toggleGenderFilter('female', e.target.checked)
-                                                       }}/>} label="Females only"/>
+                    <FormControlLabel
+                        data-cy={'filter-switch'}
+                        control={<Switch checked={onlyMales}
+                                         onChange={(e) => {
+                                             toggleGenderFilter('male', e.target.checked)
+                                         }}/>} label="Males only"/>
+                    <FormControlLabel
+                        data-cy={'filter-switch'}
+                        control={<Switch checked={onlyFemales}
+                                         onChange={(e) => {
+                                             toggleGenderFilter('female', e.target.checked)
+                                         }}/>} label="Females only"/>
                 </FormGroup>
                 <TablePagination
                     rowsPerPageOptions={[10, 20, 50]}
